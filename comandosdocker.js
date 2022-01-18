@@ -18,3 +18,8 @@ docker-compose stop: Parar container
 docker-compose down: Remover um container
 docker-compose up --force-recreate: Recriar e subir o container com base no docker-compose
 */
+
+
+
+
+// CRIAR migrations: npm run typeorm migration:create -n CreateCategories
