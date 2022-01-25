@@ -14,7 +14,8 @@ docker logs nomeAplicação -f: Ver os logs e manter eles sendo observador no co
 
 
     COMANDOS DOCKER-COMPOSE
-docker-compose up -d: Executar container
+docker-compose up -d: Executar container em background
+docker-compose up: Executar container
 docker-compose stop: Parar container
 docker-compose down: Remover um container
 docker-compose up --force-recreate: Recriar e subir o container com base no docker-compose
