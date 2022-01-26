@@ -27,3 +27,5 @@ docker-compose up --force-recreate: Recriar e subir o container com base no dock
 
 
 //instalar typeorm: npm i typeorm reflect-metadata
+
+//biblioteca injeção de dependencias npm i tsyringe --save
