@@ -10,7 +10,6 @@ class CategoriesRepository implements ICategoriesRepository{
        this.repository = getRepository(Category)
     }
 
-    // Responsavewl por criar uma instancia da classe ou repassar uma instacia já existente para quem requisitar
 /*
     public static getInstance(): CategoriesRepository{
         if(!CategoriesRepository.INSTANCE){

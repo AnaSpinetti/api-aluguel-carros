@@ -25,3 +25,5 @@ docker-compose up --force-recreate: Recriar e subir o container com base no dock
 // CRIAR migrations: .\node_modules\.bin\typeorm migrations:create -n CreateCategories
 // Executar migrations: npm run typeorm migration:run
 
+
+//instalar typeorm: npm i typeorm reflect-metadata
