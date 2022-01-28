@@ -7,3 +7,4 @@ import { ISpecificationRepository } from "../../modules/cars/repositories/ISpeci
 
 container.registerSingleton<ICategoriesRepository>("CategoriesRepository", CategoriesRepository);
 container.registerSingleton<ISpecificationRepository>("SpecificationRepository", SpecificationRepository);
+container.registerSingleton<IUsersRepository>("UsersRepository", UsersRepository);

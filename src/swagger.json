@@ -78,20 +78,14 @@
                 "description": "Upload data to a category",
                 "requestBody":{
                     "content": {
-                        "application/json":{
+                        "multipart/form-data":{
                             "schema":{
                                 "type": "object",
                                 "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "description":{
-                                        "type": "string"
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
                                     }
-                                },
-                                "example":{
-                                    "name": "category name sample",
-                                    "description": "Category description sample"
                                 }
                             }
                         }
@@ -137,26 +131,14 @@
         },
         "/specifications":{
             "post": {
-                "tags": ["Category"],
+                "tags": ["Specifications"],
                 "summary": "Create a specification",
                 "description": "Create a new specification",
                 "requestBody":{
                     "content": {
                         "application/json":{
                             "schema":{
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "description":{
-                                        "type": "string"
-                                    }
-                                },
-                                "example":{
-                                    "name": "specification name sample",
-                                    "description": "specification description sample"
-                                }
+                                "$ref": "#/definitions/Specification"
                             }
                         }
                     }
@@ -168,6 +150,19 @@
                     "500": {
                         "description": "specification Already Exists"
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Specification": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description":{
+                    "type": "string"
                 }
             }
         }
