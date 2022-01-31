@@ -1,7 +1,7 @@
+import { sign } from "jsonwebtoken";
+import { compare } from "bcryptjs";
 import { inject, injectable } from "tsyringe";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
-import { compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
 
 
 interface IRequest{
@@ -27,7 +27,6 @@ class AuthenticateUserUseCase {
     async execute({email, password}: IRequest): Promise<IResponse>{
         // Verifica se usuário existe
         const user = await this.usersRepository.findByEmail(email)
-
         if(!user){
             throw new Error("Email ou senha incorretos")
         }
@@ -44,10 +43,15 @@ class AuthenticateUserUseCase {
             expiresIn: "1d"
         });
 
-        return {
-            user, 
-            token
+        const tokenReturn: IResponse = {
+            token,
+            user: {
+                name: user.name,
+                email: user.email
+            }
         }
+
+        return tokenReturn; 
     }
 }
 
