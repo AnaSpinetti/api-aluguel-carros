@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDTO";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
 import { hash } from "bcryptjs";
+import { AppErrors } from "../../../../errors/AppErrors";
 
 
 interface IRequest{
@@ -24,7 +25,7 @@ class CreateUserUseCase{
         const userAlreadyExist = await this.usersRepository.findByEmail(email);
 
         if(userAlreadyExist){
-            throw new Error("Usuário ou senha inválidos")
+            throw new AppErrors("Usuário ou senha inválidos", 401)
         }
 
         //Criptografando senha no banco
