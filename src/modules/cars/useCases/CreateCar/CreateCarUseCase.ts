@@ -1,4 +1,4 @@
-import { AppErrors } from "src/errors/AppErrors";
+import { AppErrors } from "../../../../errors/AppErrors";
 import { inject, injectable } from "tsyringe";
 import { ICarsRepository } from "../../repositories/ICarsRepository";
 
