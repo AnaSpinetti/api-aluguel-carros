@@ -55,3 +55,16 @@ Deve ser possível cadastrar um aluguel.
 O aluguel deve ter duração mínima de 24 horas.
 Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo usuário.
 Não deve ser possível cadastrar um novo aluguel caso já exista um aberto para o mesmo carro.
+
+
+# ANOTAÇÕES PESSOAIS
+migrações: 
+> npx typeorm migration:create -n CreateCars
+> npm run typeorm migration:run
+
+Dockerfile: 
+> docker build .
+
+Docker Compose: 
+> docker-compose up -d
+
