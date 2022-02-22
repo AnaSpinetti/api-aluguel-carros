@@ -9,7 +9,7 @@ class CarsRepository implements ICarsRepository{
     constructor(){
         this.repository = getRepository(Car)
     }
-    
+
     async create({
         name,
         description,
@@ -36,6 +36,20 @@ class CarsRepository implements ICarsRepository{
     async findByLicensePlate(license_plate: string): Promise<Car> {
         const car = await this.repository.findOne({license_plate});
         return car;
+    }
+
+    async findAvailable(category_id?: string, brand?: string, name?: string): Promise<Car[]> {
+        const cars = await this.repository
+            .filter((car) => {
+                if(car.available === true && ((brand && car.brand === brand) || 
+                (category_id && car.category_id === category_id) ||
+                (name && car.name === name))){
+                    return car
+                }
+                return null;
+            })
+
+        return cars;
     }
 }
 
