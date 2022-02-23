@@ -1,4 +1,4 @@
-import { inject } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 import { Car } from "../../entities/Car";
 import { ICarsRepository } from "../../repositories/ICarsRepository";
 
@@ -7,7 +7,7 @@ interface IRequest{
     brand?: string;
     name?: string;
 }
-
+@injectable()
 class ListCarsUseCase{
     constructor(
         @inject("CarsRepository")
