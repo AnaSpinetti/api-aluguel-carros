@@ -1,0 +1,8 @@
+
+
+
+class CreateRentalUseCase{
+
+}
+
+export {CreateRentalUseCase}
