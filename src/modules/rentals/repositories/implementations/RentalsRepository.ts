@@ -21,7 +21,6 @@ class RentalsRepository implements IRentalsRepository{
             car_id,
             expected_return_date,
             user_id,
-            start_date: new Date()
         })
 
         await this.repository.save(rental);
@@ -29,11 +28,13 @@ class RentalsRepository implements IRentalsRepository{
     }
     
     async findOpenRentalByCar(car_id: string): Promise<Rental> {
-        const rental = await this.repository.find(rental => rental.car_id === car_id && !rental.end_date);
+        const openByCar = await this.repository.findOne({car_id});
+        return openByCar;
     }
-
+    
     async findOpenRentalByUser(user_id: string): Promise<Rental> {
-        await this.rentals.find(rental => rental.user_id === user_id && !rental.end_date);
+        const openByUser = await this.repository.findOne({user_id});
+        return openByUser;
     }
 
 }

@@ -1,3 +1,4 @@
+import './providers'
 import { ICarsRepository } from "../../modules/cars/repositories/ICarsRepository"
 import { CarsRepository } from "../../modules/cars/repositories/implementations/CarsRepository";
 import { container } from "tsyringe";
