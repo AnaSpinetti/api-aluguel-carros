@@ -1,16 +1,16 @@
-import { inject } from "tsyringe"
+import { inject, injectable } from "tsyringe"
 import { ICarsRepository } from "src/modules/cars/repositories/ICarsRepository"
 import { IRentalsRepository } from "../../repositories/IRentalsRepository"
 import { AppErrors } from "../../../../errors/AppErrors"
 import { IDateProvider } from "../../../../shared/container/providers/dateProvider/IDateProvider"
-import { CustomRepositoryCannotInheritRepositoryError } from "typeorm"
+import { Rental } from "../../entities/Rental"
 
 interface IRequest{
     id: string,
     user_id: string
 }
 
-
+@injectable()
 class DevolutionRentalUseCase{
     constructor(
     @inject("RentalsRepository") private rentalsRepository: IRentalsRepository,
@@ -18,9 +18,9 @@ class DevolutionRentalUseCase{
     @inject("DayJsDateProvider") private dateProvider: IDateProvider
     ){}
     
-    async execute({id, user_id}: IRequest){
+    async execute({id, user_id}: IRequest): Promise<Rental>{
         const rental = await this.rentalsRepository.findById(id)
-        const car = await this.carsRepository.findById(id)
+        const car = await this.carsRepository.findById(rental.car_id)
 
         if(!rental){
             throw new AppErrors("Rental does not exists")
@@ -48,6 +48,8 @@ class DevolutionRentalUseCase{
 
         await this.rentalsRepository.create(rental);
         await this.carsRepository.updateAvailable(car.id, true);
+
+        return rental;
     }
 }
     
