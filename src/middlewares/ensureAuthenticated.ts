@@ -1,5 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
+import auth from "src/config/auth";
+import { UsersTokensRepository } from "src/modules/accounts/repositories/implementations/UsersTokensRepository";
 import { AppErrors } from "../errors/AppErrors";
 import { UsersRepository } from "../modules/accounts/repositories/implementations/UsersRepository";
 
@@ -9,6 +11,7 @@ interface IPayload{
 
 export async function ensureAuthenticated(req: Request, res: Response, next: NextFunction) {
     const authHeader = req.headers.authorization;
+    const usersTokensRepository = new UsersTokensRepository();
 
     if(!authHeader){
         throw new AppErrors("Token não enviado", 401);
@@ -17,10 +20,10 @@ export async function ensureAuthenticated(req: Request, res: Response, next: Nex
     const [, token] = authHeader.split(" ")
 
     try {
-        const {sub: user_id} = verify(token, "a2932b34ec541c8b99f682f9b813f3b7") as IPayload
+        const {sub: user_id} = verify(token, auth.secret_refresh_token) as IPayload
         
         const usersRepository = new UsersRepository();
-        const user = await usersRepository.findById(user_id)
+        const user = await usersTokensRepository.findByUserIdAndToken(user_id, token)
 
         if(!user){
             throw new AppErrors("Usuário não localizado", 401)
